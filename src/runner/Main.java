@@ -13,28 +13,28 @@ import model.Problem;
 
 public class Main {
 
-    public static void main(String[] args) throws ParserException {
+	public static void main(String[] args) throws ParserException {
 
-	List<String> inputs = Arrays.asList("example.in", "small.in");
+		List<String> inputs = Arrays.asList("example.in", "small.in");
 
-	ExecutorService executor = Executors.newCachedThreadPool();
-	try {
-	    for (String input : inputs) {
-		Problem problem = new Parser(Paths.get("input/" + input)).parse();
-		Runner runner = new Runner(problem);
-		executor.submit(runner);
-	    }
-
-	    while (!executor.isTerminated()) {
+		ExecutorService executor = Executors.newCachedThreadPool();
 		try {
-		    executor.shutdown();
-		    executor.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
-		} catch (InterruptedException ignore) {
+			for (String input : inputs) {
+				Problem problem = new Parser(Paths.get("input/" + input)).parse();
+				Runner runner = new Runner(problem);
+				executor.submit(runner);
+			}
+
+			while (!executor.isTerminated()) {
+				try {
+					executor.shutdown();
+					executor.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+				} catch (InterruptedException ignore) {
+				}
+			}
+		} finally {
+			executor.shutdownNow();
 		}
-	    }
-	} finally {
-	    executor.shutdownNow();
 	}
-    }
 
 }

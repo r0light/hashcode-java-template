@@ -6,19 +6,19 @@ import model.Problem;
 
 public class Runner implements Runnable {
 
-    private Problem problem;
+	private Problem problem;
 
-    public Runner(Problem problem) {
-	this.problem = problem;
-    }
+	public Runner(Problem problem) {
+		this.problem = problem;
+	}
 
-    @Override
-    public void run() {
-	/*
-	 * potentially adjust to use other solver or more than one
-	 */
-	Solver solver = new SimpleSolver(problem);
-	solver.compute();
-    }
+	@Override
+	public void run() {
+		/*
+		 * potentially adjust to use other solver or more than one
+		 */
+		Solver solver = new SimpleSolver(problem);
+		solver.compute();
+	}
 
 }

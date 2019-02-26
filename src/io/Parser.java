@@ -11,39 +11,39 @@ import model.Problem;
 
 public class Parser {
 
-    private final Path path;
+	private final Path path;
 
-    public Parser(Path path) {
-	this.path = path;
-    }
-
-    public Problem parse() throws ParserException {
-	List<String> lines;
-	try {
-	    lines = Files.readAllLines(path, StandardCharsets.US_ASCII);
-
-	    // TODO start parsing header
-
-	    return new Problem(path.getFileName().toString());
-	} catch (IOException e) {
-	    throw new ParserException(e);
+	public Parser(Path path) {
+		this.path = path;
 	}
-    }
 
-    private int[] parseHeader(String line) throws ParserException {
-	String[] strParts = line.split(" ");
-	if (strParts.length != 4) {
-	    throw new ParserException("Header row must contain 4 ints");
+	public Problem parse() throws ParserException {
+		List<String> lines;
+		try {
+			lines = Files.readAllLines(path, StandardCharsets.US_ASCII);
+
+			// TODO start parsing header
+
+			return new Problem(path.getFileName().toString());
+		} catch (IOException e) {
+			throw new ParserException(e);
+		}
 	}
-	// 0: rows, 1: columns, 2: min ingredients per slice, 3: max cells per
-	// slice
-	int[] parts;
-	try {
-	    parts = Arrays.stream(strParts).mapToInt(Integer::parseInt).toArray();
-	} catch (NumberFormatException e) {
-	    throw new ParserException("Header row must only contain ints", e);
+
+	private int[] parseHeader(String line) throws ParserException {
+		String[] strParts = line.split(" ");
+		if (strParts.length != 4) {
+			throw new ParserException("Header row must contain 4 ints");
+		}
+		// 0: rows, 1: columns, 2: min ingredients per slice, 3: max cells per
+		// slice
+		int[] parts;
+		try {
+			parts = Arrays.stream(strParts).mapToInt(Integer::parseInt).toArray();
+		} catch (NumberFormatException e) {
+			throw new ParserException("Header row must only contain ints", e);
+		}
+		return parts;
 	}
-	return parts;
-    }
 
 }
