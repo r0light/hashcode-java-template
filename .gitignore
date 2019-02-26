@@ -2,3 +2,8 @@
 bin/
 .DS_Store
 Thumbs.db
+
+.metadata
+.settings/
+.loadpath
+.recommenders
