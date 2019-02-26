@@ -1,5 +1,7 @@
 package runner;
 
+import algo.SimpleSolver;
+import algo.Solver;
 import model.Problem;
 
 public class Runner implements Runnable {
@@ -12,7 +14,11 @@ public class Runner implements Runnable {
 
     @Override
     public void run() {
-
+	/*
+	 * potentially adjust to use other solver or more than one
+	 */
+	Solver solver = new SimpleSolver(problem);
+	solver.compute();
     }
 
 }

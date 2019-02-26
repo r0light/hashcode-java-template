@@ -1,16 +1,7 @@
 package algo;
 
-import model.Problem;
+public interface Solver {
 
-public class Solver {
+    void compute();
 
-    private final Problem problem;
-
-    public Solver(Problem p) {
-	this.problem = p;
-    }
-
-    public void compute() {
-
-    }
 }
